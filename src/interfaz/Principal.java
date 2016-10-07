@@ -73,7 +73,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.add(txtNumeroColumnas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 50, -1));
         jPanel2.add(txtNumeroFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 50, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 280, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 280, 100));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Acciones"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +103,12 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.add(cmdAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
         cmdOperacion.setText("Operación");
-        jPanel3.add(cmdOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        cmdOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdOperacionActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
         cmdLimpiar.setText("Limpiar");
         cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,9 +116,9 @@ public class Principal extends javax.swing.JFrame {
                 cmdLimpiarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 70, -1));
+        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 70, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 300, 90));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 300, 100));
 
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -278,7 +283,6 @@ public class Principal extends javax.swing.JFrame {
         cmbOperacion.setSelectedIndex(0);
 
         Helper.porDefectoTabla(tblTabla);
-        
 
         JButton botonesH[] = {cmdCrear, cmdLimpiar};
         JButton botonesD[] = {cmdManual, cmdAutomatico, cmdOperacion};
@@ -286,6 +290,29 @@ public class Principal extends javax.swing.JFrame {
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void cmdOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionActionPerformed
+        int op;
+        int nf, nc;
+
+        nf = tblTabla.getRowCount();
+        nc = tblTabla.getColumnCount();
+        op = cmbOperacion.getSelectedIndex();
+
+        switch (op) {
+            case 0:
+                txtResultado.setText(Helper.recorridoForma2(tblTabla));
+                break;
+            
+
+        }
+        
+         JButton botonesH[] = {cmdOperacion, cmdLimpiar};
+        JButton botonesD[] = {cmdManual, cmdAutomatico};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+    }//GEN-LAST:event_cmdOperacionActionPerformed
 
     /**
      * @param args the command line arguments
